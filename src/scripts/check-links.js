@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-// Check piped links while allowing a fixed amount to fail
-// Adapted from tap-json.
 var Parser = require('tap-parser');
 var through = require('through2');
 var duplexer = require('duplexer');
@@ -18,33 +16,25 @@ function checkLinks(args) {
   var out = through.obj();
   var dup = duplexer(tap, out);
 
-  var data = [];
-  var name = null;
+  tap.on('assert', ({ ok, name, diag = {} }) => {
+    let isSupport = /class="support__[^"]*"/.test(diag.at)
+    let isShield = /src="https:\/\/img\.shields\.io[^"]*"/.test(diag.at)
 
-  tap.on('complete', function(res) {
-    const failures = res.failures.filter(failure => {
-      return failure.diag && failure.diag.at ? !(
-        /class="support__[^"]*"/.test(failure.diag.at) ||
-        /src="https:\/\/img\.shields\.io[^"]*"/.test(failure.diag.at)
-      ) : false;
-    });
+    if ( isSupport || isShield ) {
+      let type = isSupport ? 'Support' : 'Shield'
+      print(`IGNORE (${type}): ` + diag.actual)
 
-    if (failures.length > 0) {
-      console.log(formatFailures(failures));
-    }
+    } else if ( !ok ) {
+      console.error(name + '\n' + diag.actual + ' at ' + diag.at)
+      process.exit(1)
 
-    // Fail hard only if over skip threshold
-    if (failures.length > skip) {
-      process.exit(1);
-    }
-  });
+    } else print(name)
+  })
 
   return dup;
 }
 
-function formatFailures(failures) {
-  return failures.map(failure => {
-    let { diag = {} } = failure;
-    return failure.name + '\n' + diag.actual + ' at ' + diag.at;
-  }).join('\n\n');
+function print(message) {
+  if ( message.length > 85 ) console.log( message.slice(0, 80) + '...' )
+  else console.log( message )
 }
