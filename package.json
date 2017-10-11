@@ -68,7 +68,7 @@
     "github": "^10.0.0",
     "html-webpack-plugin": "^2.30.1",
     "http-server": "^0.10.0",
-    "hyperlink": "github:munter/hyperlink#fix/defaultTimeout",
+    "hyperlink": "github:skipjack/hyperlink#patch-1",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",
     "markdown-loader": "^2.0.1",
