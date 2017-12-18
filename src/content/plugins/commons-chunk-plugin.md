@@ -46,6 +46,9 @@ new webpack.optimize.CommonsChunkPlugin(options)
   children: boolean,
   // If `true` all children of the commons chunk are selected
 
+  deepChildren: boolean,
+  // If `true` all descendants of the commons chunk are selected
+
   async: boolean|string,
   // If `true` a new async commons chunk is created as child of `options.name` and sibling of `options.chunks`.
   // It is loaded in parallel with `options.chunks`.
@@ -198,7 +201,7 @@ new webpack.optimize.CommonsChunkPlugin({
   name: "vendor",
   minChunks: function (module) {
     // this assumes your vendor imports exist in the node_modules directory
-    return module.context && module.context.indexOf("node_modules") !== -1;
+    return module.context && module.context.includes("node_modules");
   }
 })
 ```

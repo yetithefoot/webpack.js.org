@@ -1,9 +1,10 @@
 ---
-title: Command Line Interface (CLI)
+title: Command Line Interface
 sort: 2
 contributors:
   - ev1stensberg
   - simon04
+  - tbroadley
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -17,11 +18,9 @@ related:
     url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
 ---
 
-webpack provides a Command Line Interface (CLI) to configure and interact with your build. This is mostly useful in case of early prototyping, profiling, writing npm scripts or personal customization of the build.
-
 For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
 
-Have a look at the [installation guide](/guides/installation) unless you have webpack already running.
+Have a look at the [installation guide](/guides/installation) if you don't already have webpack installed.
 
 T> The new CLI for webpack is under development. New features are being added such as the `--init` flag. [Check it out!](https://github.com/webpack/webpack-cli)
 
@@ -152,7 +151,7 @@ Parameter                 | Explanation                                 | Input 
 `--output-filename`       | The output filename of the bundle           | string     | [name].js
 `--output-jsonp-function` | The name of the JSONP function used for chunk loading | string | webpackJsonp
 `--output-library`        | Expose the exports of the entry point as library | string |
-`--output-library-target` | The type for exposing the exports of the entry,point as library | string | var
+`--output-library-target` | The type for exposing the exports of the entry point as library | string | var
 `--output-path`           | The output path for compilation assets      | string     | Current directory
 `--output-pathinfo`       | Include a comment with the request for every dependency | boolean | false
 `--output-public-path`    | The public path for the assets              | string     | /
@@ -217,7 +216,6 @@ These options makes the build [watch](/configuration/watch/) for changes in file
 Parameter                 | Explanation
 ------------------------- | ----------------------
 `--watch`, `-w`           | Watch the filesystem for changes
-`--save`, `-s`            | Recompiles on save regardless of changes
 `--watch-aggregate-timeout` | Timeout for gathering changes while watching
 `--watch-poll`            | The polling interval for watching (also enable polling)
 `--watch-stdin`, `--stdin` | Exit the process when stdin is closed
@@ -241,7 +239,7 @@ These allow you to configure the webpack [resolver](/configuration/resolve/) wit
 Parameter              | Explanation                                             | Example
 ---------------------- | ------------------------------------------------------- | -------------
 --resolve-alias        | Setup a module alias for resolving                      | --resolve-alias jquery-plugin=jquery.plugin
---resolve-extensions   | Setup extensions that should be used to resolve,modules | --resolve-extensions .es6 .js .ts
+--resolve-extensions   | Setup extensions that should be used to resolve modules | --resolve-extensions .es6 .js .ts
 --resolve-loader-alias | Minimize javascript and switches loaders to minimizing  |
 
 

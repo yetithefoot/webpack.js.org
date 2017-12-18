@@ -13,6 +13,8 @@ contributors:
   - redian
   - skipjack
   - xgqfrms
+  - kelset
+  - xgirma
 ---
 
 In this guide we'll dive into some of the best practices and utilities for building a production site or application.
@@ -127,6 +129,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "clean-webpack-plugin": "^0.1.17",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",
@@ -135,6 +138,8 @@ __package.json__
       "style-loader": "^0.18.2",
       "webpack": "^3.0.0",
       "webpack-dev-middleware": "^1.12.0",
+      "webpack-dev-server": "^2.9.1",
+      "webpack-merge": "^4.1.0",
       "xml-loader": "^1.2.1"
     }
   }
@@ -175,6 +180,7 @@ __webpack.prod.js__
   })
 ```
 
+T> Avoid `inline-***` and `eval-***` use in production as they can increase bundle size and reduce the overall performance.
 
 ## Specify the Environment
 
@@ -189,14 +195,13 @@ __webpack.prod.js__
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
-    devtool: 'cheap-module-source-map',
+    devtool: 'source-map',
     plugins: [
--     new UglifyJSPlugin()
-+     new UglifyJSPlugin(),
+      new UglifyJSPlugin({
+        sourceMap: true
+      }),
 +     new webpack.DefinePlugin({
-+       'process.env': {
-+         'NODE_ENV': JSON.stringify('production')
-+       }
++       'process.env.NODE_ENV': JSON.stringify('production')
 +     })
     ]
   })

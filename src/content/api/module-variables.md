@@ -1,10 +1,12 @@
 ---
-title: Module API - Variables
-sort: 3
+title: Module Variables
+group: Modules
+sort: 4
 contributors:
   - skipjack
   - sokra
   - ahmehri
+  - tbroadley
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -49,7 +51,7 @@ W> This CANNOT be used in an asynchronous function.
 
 ### `exports` (CommonJS)
 
-This variable is equal ot default value of `module.exports` (i.e. an object). If `module.exports` gets overwritten, `exports` will no longer be exported.
+This variable is equal to default value of `module.exports` (i.e. an object). If `module.exports` gets overwritten, `exports` will no longer be exported.
 
 ``` javascript
 exports.someValue = 42;
