@@ -32,7 +32,7 @@
     "fetch": "sh src/scripts/fetch.sh",
     "init:generated": "mkdirp ./generated/loaders && mkdirp ./generated/plugins ",
     "lint": "run-s lint:*",
-    "lint:links": "hyperlink -r build/index.html --verbose --concurrency=10 --canonicalroot https://webpack.js.org/ | node ./src/scripts/check-links.js",
+    "lint:links": "hyperlink -r build/index.html --verbose --concurrency=60 --canonicalroot https://webpack.js.org/ | node ./src/scripts/check-links.js",
     "lint:js": "eslint . --ext .js --ext .jsx",
     "lint:markdown": "markdownlint --config ./.markdownlint.json *.md ./src/content/**/*.md",
     "lint:social": "alex . -q",
